@@ -25,31 +25,24 @@ import { rPartner } from '#repos';
  */
 export default async (req, res, next) => {
   try {
-    console.log(req);
-    const { name, description } = req.body;
+    const { name, description, logoUrl } = req.body;
 
     if (!name) {
       return res.status(400).json({ error: 'Поле "name" обязательно' });
     }
 
     const existing = await rPartner.get({ name });
-    console.log(existing);
     if (existing) {
       return res.status(409).json({ error: 'Партнёр с таким именем уже существует' });
     }
 
     const apiKey = randomUUID();
-    let logoUrl = null;
-    if (req.file && req.file.filename) {
-      logoUrl = `/uploads/partners/${req.file.filename}`;
-    }
 
-    console.log(logoUrl);
     const newPartner = await rPartner.create({
       name,
       description: description || null,
       apiKey,
-      logoUrl
+      logoUrl 
     });
 
     return res.status(201).json({

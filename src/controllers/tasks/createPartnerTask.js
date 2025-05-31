@@ -82,7 +82,8 @@ export default async (req, res) => {
     expiredAt,
     amount,
     type,
-    priority
+    priority,
+    logoUrl
   } = req.body;
 
   if (!apiKey) {
@@ -99,11 +100,6 @@ export default async (req, res) => {
       error:
         'Не все обязательные поля задачи заполнены: title, description, expiredAt, amount'
     });
-  }
-
-  let logoUrl = null;
-  if (req.file) {
-    logoUrl = path.posix.join('/uploads/partners', req.file.filename);
   }
 
   const payload = {

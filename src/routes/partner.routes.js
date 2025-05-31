@@ -7,13 +7,11 @@ export default [
     verb: 'post',
     handler: rPartnerRegistration,
     authedOnly: false,
-    uploadLogo: true,
   },
   {
     path: '/partner/createTask',
     verb: 'post',
     handler: rCreatePartnerTask,
     authedOnly: false,
-    uploadLogo: true,
   },
 ];
