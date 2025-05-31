@@ -2,3 +2,5 @@
 .env
 package-lock.json
 /database
+/public
+.DS_STORE

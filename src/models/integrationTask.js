@@ -30,9 +30,9 @@ export default async (sequelize) => {
     },
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
-        model: 'users', 
+        model: 'users',
         key: 'id',
       },
       onUpdate: 'CASCADE',
@@ -41,8 +41,23 @@ export default async (sequelize) => {
     priority: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 0, 
+      defaultValue: 0,
     },
+    partnerId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'partners',
+        key: 'id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL',
+    },
+    logo: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      comment: 'Путь или URL до логотипа задачи'
+    }
   }, {
     tableName: 'integrationTasks',
     timestamps: true,
@@ -57,6 +72,11 @@ export default async (sequelize) => {
       foreignKey: 'iTaskGuid',
       sourceKey: 'guid',
       as: 'task',
+    });
+
+    IntegrationTask.belongsTo(db.Partners, {
+      foreignKey: 'partnerId',
+      as: 'partner',
     });
   };
 
