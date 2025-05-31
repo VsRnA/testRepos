@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "#infrastructure/*": [ "./src/infrastructure/*" ],
+      "#controllers/*": [ "./src/controllers/*" ],
+      "#db": [ "./src/infrastructure/sequelize.js" ],
+      "#repos": [ "./src/repositories/index.js" ],
+      "#repositories/*": [ "./src/repositories/*" ],
+      "#models": [ "./src/models/index.js" ],
+      "#routes": [ "./src/routes/index.js" ],
+      "#config/*": [ "./config/*" ]
+    }
+  }
+}
