@@ -25,7 +25,7 @@ export default async (sequelize) => {
         key: 'id',
       },
       onUpdate: 'CASCADE',
-      onDelete: 'SET NULL',
+      onDelete: 'CASCADE',
     },
     name: {
       type: DataTypes.STRING,

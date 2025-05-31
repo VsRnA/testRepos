@@ -12,16 +12,6 @@ export default async (sequelize) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'users',
-        key: 'id',     
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'SET NULL',
-    },
     iTaskGuid: {
       type: DataTypes.UUID,
       allowNull: true,
@@ -30,11 +20,18 @@ export default async (sequelize) => {
         key: 'guid',             
       },
       onUpdate: 'CASCADE',
-      onDelete: 'SET NULL',
+      onDelete: 'CASCADE',
     },
-    name: {
-      type: DataTypes.STRING,
+    premiseId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: 'premises',
+        key: 'id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+      primaryKey: true,
     },
   }, {
     tableName: 'tasks',

@@ -1,31 +1,35 @@
 import { DataTypes } from 'sequelize';
 
 export default async (sequelize) => {
-  const Bonus = sequelize.define('Bonuses', {
+  const Bonuses = sequelize.define('Bonuses', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     premiseId: {
       type: DataTypes.INTEGER,
-      allowNull: true,
       references: {
         model: 'premises',
-        key: 'id',
+        key: 'id'
       },
-      onUpdate: 'CASCADE',
-      onDelete: 'SET NULL',
+      onDelete: 'CASCADE',   // <- здесь опечатка
+      onUpdate: 'CASCADE'
     },
     count: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-    },
+      allowNull: false
+    }
   }, {
     tableName: 'Bonuses',
-    timestamps: false,
+    timestamps: false
   });
 
-  Bonus.associate = (db) => {
-    Bonus.belongsTo(db.Premises, {
+  Bonuses.associate = (db) => {
+    Bonuses.belongsTo(db.Premises, {
       foreignKey: 'premiseId',
     });
   };
 
-  return Bonus;
+  return Bonuses;
 };

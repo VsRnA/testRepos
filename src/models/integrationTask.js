@@ -36,7 +36,7 @@ export default async (sequelize) => {
         key: 'id',
       },
       onUpdate: 'CASCADE',
-      onDelete: 'SET NULL',
+      onDelete: 'CASCADE',
     },
     priority: {
       type: DataTypes.INTEGER,
@@ -51,7 +51,7 @@ export default async (sequelize) => {
         key: 'id',
       },
       onUpdate: 'CASCADE',
-      onDelete: 'SET NULL',
+      onDelete: 'CASCADE',
     },
     logo: {
       type: DataTypes.STRING,
