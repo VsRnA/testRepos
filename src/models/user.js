@@ -2,8 +2,9 @@ import { DataTypes } from 'sequelize';
 
 export default async (sequelize) => {
   const User = sequelize.define('Users', {
-    guid: {
-      type: DataTypes.UUID,
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
       allowNull: false,
       unique: true,
       primaryKey: true,
