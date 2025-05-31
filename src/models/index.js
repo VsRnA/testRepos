@@ -23,7 +23,8 @@ async function initDb() {
     .filter(model => typeof model.associate === 'function')
     .forEach(model => model.associate(db));
 
-  await sequelize.sync({ force: true });
+  // await sequelize.sync({ force: true });
+  return db;
 }
 
 export default await initDb();

@@ -4,6 +4,7 @@ export default async (sequelize) => {
   const Premise = sequelize.define('Premises', {
     id: {
       type: DataTypes.INTEGER,
+      autoIncrement: true,
       allowNull: false,
       unique: true,
       primaryKey: true,
