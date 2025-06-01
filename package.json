@@ -36,6 +36,7 @@
     "#repositories/*": "./src/repositories/*",
     "#models": "./src/models/index.js",
     "#routes": "./src/routes/index.js",
-    "#config/*": "./config/*"
+    "#config/*": "./config/*",
+    "#constants/*": "./constants/*"
   }
 }
