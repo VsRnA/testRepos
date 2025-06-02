@@ -11,14 +11,14 @@ export default async () => {
   );
 
   const toCreate = [];
-  for (const it of integrationTasks) {
-    for (const pm of premises) {
-      const key = `${it.guid}-${pm.id}`;
-      if (!existingSet.has(key)) {
-        toCreate.push({ 
-          guid: randomUUID(),    
-          iTaskGuid: it.guid, 
-          premiseId: pm.id 
+  for (const integrationTask of integrationTasks) {
+    for (const premise of premises) {
+      const compositeKey = `${integrationTask.guid}-${premise.id}`;
+      if (!existingSet.has(compositeKey)) {
+        toCreate.push({
+          guid: randomUUID(),
+          iTaskGuid: integrationTask.guid,
+          premiseId: premise.id
         });
       }
     }
@@ -28,8 +28,5 @@ export default async () => {
     return [];
   }
 
-  console.log(toCreate);
-
-  const created = await rTask.bulkCreate(toCreate);
-  return created;
+  await rTask.bulkCreate(toCreate);
 }

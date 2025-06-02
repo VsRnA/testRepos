@@ -5,11 +5,9 @@ import config from '#config/config.js';
 import { runCronTasks } from '#infrastructure/cron.js';
 
 async function startServer() {
-  // Попытка запустить сервер
   const server = app.listen(config.port, '0.0.0.0' ,() => {
     console.info(`Server started on port ${config.port}`);
 
-    // Запускаем cron-задачи только после успешного поднятия сервера
     if (config.cronEnable) {
       runCronTasks();
     }
@@ -19,7 +17,6 @@ async function startServer() {
     if (err.code === 'EADDRINUSE') {
       console.warn(`Порт ${config.port} уже занят. Пытаюсь освободить...`);
       try {
-        // killPort сам выберет нужную команду под вашу ОС
         await killPort(config.port);
         console.info(`Порт ${config.port} освобождён. Перезапускаю сервер через 500мс…`);
         setTimeout(startServer, 500);
@@ -38,7 +35,6 @@ try {
   await sequelize.authenticate();
   console.log('Connection to the database has been established successfully.');
 
-  // Запускаем сервер (с автоматическим «добиванием» занятого порта)
   await startServer();
 } catch (err) {
   console.error('Server initialization error:', err);

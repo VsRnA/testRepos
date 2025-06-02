@@ -6,6 +6,5 @@ export default async (query) => {
   if (query.guid) where.guid = query.guid;
   if (query.premiseId) where.premiseId = query.premiseId;
 
-  console.log(where);
   return db.Tasks.findOne({ where })
 }

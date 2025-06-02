@@ -13,7 +13,7 @@ export default async (sequelize) => {
         model: 'premises',
         key: 'id'
       },
-      onDelete: 'CASCADE',   // <- здесь опечатка
+      onDelete: 'CASCADE',
       onUpdate: 'CASCADE'
     },
     count: {

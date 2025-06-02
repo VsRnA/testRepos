@@ -6,22 +6,24 @@ export default async (req, res) => {
 
   const tasks = await rTask.list(listOptions);
   const baseUrl = `${req.protocol}://${req.get('host')}`;
+  const fullUrl = path => path ? `${baseUrl}${path}` : null;
 
-  const prefix = (path) => (path ? `${baseUrl}${path}` : null);
+  const tasksWithLogoUrls = tasks.map(instance => {
+    const task = instance.toJSON?.() ?? instance;
+    const { integrationTask = {} } = task;
+    const { logo, partner = {} } = integrationTask;
 
-  const tasksWithLogoUrls = tasks.map((instance) => {
-    const task = instance.toJSON?.() ?? { ...instance };
-
-    const integrationTask = {
-      ...(task.integrationTask ?? {}),
-      logo: prefix(task.integrationTask?.logo),
-      partner: {
-        ...(task.integrationTask?.partner ?? {}),
-        logoUrl: prefix(task.integrationTask?.partner?.logoUrl),
+    return {
+      ...task,
+      integrationTask: {
+        ...integrationTask,
+        logo: fullUrl(logo),
+        partner: {
+          ...partner,
+          logoUrl: fullUrl(partner.logoUrl),
+        },
       },
     };
-
-    return { ...task, integrationTask };
   });
 
   return res.status(200).json({ tasks: tasksWithLogoUrls });

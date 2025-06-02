@@ -28,4 +28,3 @@ async function initDb() {
 }
 
 export default await initDb();
-
